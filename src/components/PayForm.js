@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
-import LocalStorage from '../models/LocalStorage'
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import LocalStorage from '../models/LocalStorage';
+import {add} from '../actions/counter'
+
+
 
 
 class PayForm extends Component{
@@ -25,6 +30,7 @@ class PayForm extends Component{
         }
     }
 
+   
     
 
     cartAdd = (item) => {
@@ -86,6 +92,7 @@ class PayForm extends Component{
             },(err)=>{console.log(err)})
         })
     }
+    
 
     submitPayment = (e) => {
         e.preventDefault();
@@ -109,7 +116,9 @@ class PayForm extends Component{
         
     }
 
+    
     render(){
+        // const counter = useSelector(state => state.counter)
         return(
             <>
                 <div className="cart-option">
@@ -126,9 +135,23 @@ class PayForm extends Component{
                     Total: {this.state.total} <br/>
                     <input type="submit" value="Buy"/>
                 </form>
+
+                <h2>This is from the global state {this.props.counter}</h2>
+                <button onClick={()=> this.props.add()}>+</button>
             </>
         )
     }
 }
 
-export default PayForm
+PayForm.protoTypes = {
+    counter : PropTypes.number
+}
+
+const mapStateToProps = (state) => ({
+    counter : state.counter
+});
+
+
+
+
+export default connect(mapStateToProps, {add})(PayForm)
