@@ -10,7 +10,7 @@ class ApprovePayment extends Component{
     }
 
     paymentAccepted = () => {
-        fetch('https://artbydev-backend.herokuapp.com/pay'+ this.props.location.search + "&cartTotal=" + LocalStorage.getTotal() ,{method: 'GET'})
+        fetch('http://localhost:3001/pay'+ this.props.location.search + "&cartTotal=" + LocalStorage.getTotal() ,{method: 'GET'})
         .then((res) => {
             res.json()
             .then((data) => {console.log(data); LocalStorage.removeTotal()},(err) => {console.log(err);})

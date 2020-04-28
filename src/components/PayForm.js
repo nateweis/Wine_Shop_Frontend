@@ -71,7 +71,7 @@ class PayForm extends Component{
     }
 
     goToPayPal = (obj) => {
-        fetch('https://artbydev-backend.herokuapp.com/pay',{
+        fetch('http://localhost:3001/pay',{
             method: 'POST',
             headers:{'Accept': 'application/json', 'Content-Type': 'application/json'},
             body: JSON.stringify(obj)
