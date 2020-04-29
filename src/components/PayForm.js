@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import LocalStorage from '../models/LocalStorage';
 import {add} from '../actions/counter'
+import {addCart} from '../actions/shoppingCart'
 
 
 
@@ -30,11 +31,15 @@ class PayForm extends Component{
         }
     }
 
+    // componentWillReceiveProps(newProps){
+
+    // }
+
    
     
 
     cartAdd = (item) => {
-        console.log(item)
+        
         for (let i = 0; i < this.state.cart.length; i++) {
             if(this.state.cart[i].name === item){
               
@@ -122,17 +127,17 @@ class PayForm extends Component{
         return(
             <>
                 <div className="cart-option">
-                    Spiral : $75 <button onClick={()=>this.cartRemove("spiral")}>-</button> 
-                    <input type="number" value={this.state.cart[0].quantity} disabled/> 
-                    <button onClick={()=>this.cartAdd("spiral")}>+</button>
+                    Red Wine : $30 <button onClick={()=>this.cartRemove("spiral")}>-</button> 
+                    <input type="number" value={this.props.cart[0].quantity} disabled/> 
+                    <button onClick={()=>this.props.addCart("red")}>+</button>
                 </div>
                 <div className="cart-option">
-                     Monograms : $200 <button onClick={()=>this.cartRemove("monograms")}>-</button> 
-                    <input type="number" value={this.state.cart[1].quantity} disabled/> 
-                    <button onClick={()=>this.cartAdd("monograms")}>+</button>
+                     White Wine : $22 <button onClick={()=>this.cartRemove("monograms")}>-</button> 
+                    <input type="number" value={this.props.cart[1].quantity} disabled/> 
+                    <button onClick={()=>this.props.addCart("white")}>+</button>
                 </div>
                 <form onSubmit={this.submitPayment}>
-                    Total: {this.state.total} <br/>
+                    Total: {this.props.total} <br/>
                     <input type="submit" value="Buy"/>
                 </form>
 
@@ -144,14 +149,19 @@ class PayForm extends Component{
 }
 
 PayForm.protoTypes = {
-    counter : PropTypes.number
+    counter : PropTypes.number,
+    total : PropTypes.number,
+    cart : PropTypes.array,
+    addCart : PropTypes.func
 }
 
 const mapStateToProps = (state) => ({
-    counter : state.counter
+    counter : state.counter,
+    total : state.shoppingCart.total,
+    cart : state.shoppingCart.cart
 });
 
 
 
 
-export default connect(mapStateToProps, {add})(PayForm)
+export default connect(mapStateToProps, {add, addCart})(PayForm)

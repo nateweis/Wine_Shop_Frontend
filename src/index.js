@@ -22,27 +22,6 @@ const store = createStore(
         )
     );
 
-////////// ACTION -> DESCRIPES WHAT YOU WANT TO DO
-
-const add = () => { // this action will be named add
-    return{
-        type: 'ADD' //type is essentally name of action (can really call it whatever)
-    }
-} // actions boil down to functions that return obj
-
-const reduce = () => {
-    return{
-        type: 'REDUCE'
-    }
-}
-
-
-
-/////// (This is a way to see in the console)
-// store.subscribe(()=>console.log(store.getState()))
-
-////////// DISPATCH -> ACTUALLY EXECUTING THE ACTION 
-
 
 ReactDOM.render(
     <Provider store = {store}>

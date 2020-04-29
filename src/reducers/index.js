@@ -2,11 +2,12 @@
 import {combineReducers} from 'redux';
 
 import counterReducer from './counter';
-import loggedReducer from './isLogged';
+import shoppingCart from './shoppingCart';
+
 
 const allReducers = combineReducers({
     counter : counterReducer,
-    loggedIn : loggedReducer
+    shoppingCart
 })
 
 export default allReducers;
