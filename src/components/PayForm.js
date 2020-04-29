@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import LocalStorage from '../models/LocalStorage';
-import {add} from '../actions/counter'
 import {addCart, removeFromCart} from '../actions/shoppingCart'
 
 
@@ -35,28 +34,6 @@ class PayForm extends Component{
 
     // }
 
-   
-
-    cartRemove = (item) => {
-        for (let i = 0; i < this.state.cart.length; i++) {
-            if(this.state.cart[i].name === item && this.state.cart[i].quantity > 0){
-              
-                this.setState((pre) => {
-                    const update = pre["cart"][i]
-                    update.quantity -= 1 
-                    // pre["cart"].splice(i, 1)
-                    // pre["cart"] = [...pre["cart"], update]
-                    pre["cart"][i] = update
-
-                    pre["total"] -= parseFloat(pre["cart"][i].price)
-                    return{cart: pre["cart"], total: pre["total"]}
-                });
-
-                break; 
-            }  
-        }
-
-    }
 
     goToPayPal = (obj) => {
         fetch('http://localhost:3001/pay',{
@@ -79,14 +56,14 @@ class PayForm extends Component{
     submitPayment = (e) => {
         e.preventDefault();
 
-        if(this.state.total === 0){
+        if(this.props.total === 0){
             alert("Shopping Cart is Empty")
         }else{
             const obj = {
-                total: this.state.total + "",
+                total: this.props.total + "",
                 cart: []
             }
-            this.state.cart.forEach(item => {
+            this.props.cart.forEach(item => {
                 if(item.quantity > 0){
                     obj.cart.push(item)
                 }
@@ -118,8 +95,6 @@ class PayForm extends Component{
                     <input type="submit" value="Buy"/>
                 </form>
 
-                <h2>This is from the global state {this.props.counter}</h2>
-                <button onClick={()=> this.props.add()}>+</button>
             </>
         )
     }
@@ -142,4 +117,4 @@ const mapStateToProps = (state) => ({
 
 
 
-export default connect(mapStateToProps, {add, addCart, removeFromCart})(PayForm)
+export default connect(mapStateToProps, {addCart, removeFromCart})(PayForm)

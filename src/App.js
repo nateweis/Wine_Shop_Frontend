@@ -25,7 +25,7 @@ class App extends Component {
 
           <Route path="/payform" exact render={({history})=><PayForm history={history.push} />} />
   
-          <Route path="/good" exact render={({history})=><ApprovePayment push={history.push} />} />
+          <Route path="/good" exact render={({history, location})=><ApprovePayment push={history.push} location={location} />} />
   
           <Route render={()=>{return (<div>404 page not found</div>)}} />
         </Switch>

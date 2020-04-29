@@ -15,6 +15,7 @@ class ApprovePayment extends Component{
             res.json()
             .then((data) => {console.log(data); LocalStorage.removeTotal()},(err) => {console.log(err);})
         })
+        
     }
 
     render(){
