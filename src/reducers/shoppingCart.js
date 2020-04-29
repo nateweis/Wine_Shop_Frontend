@@ -19,8 +19,9 @@ let initState = {
 }
 
 const cartReducer = (state = initState, action) => {
-    switch(action.type){
-        case ADD_CART :
+
+        if(action.type === ADD_CART) {
+
             let selected;
             for (let i = 0; i < state.cart.length; i++) {
                 if(state.cart[i].name === action.payload){
@@ -42,18 +43,46 @@ const cartReducer = (state = initState, action) => {
             newQuantity++
             updateCart.quantity = newQuantity
             newCart[selected] = updateCart
-            // console.log(state.cart[selected].quantity)
             
             
             return {
                 cart: newCart,
                 total: newTotal
             };
-        case "REDUCE": 
-            return state - 1;
-        default : 
-            return state;    
-    }
+        }
+        else if ( action.type === REMOVE_CART){
+            
+            let selected;
+            for (let i = 0; i < state.cart.length; i++) {
+                if(state.cart[i].name === action.payload && state.cart[i].quantity > 0){
+                
+                    selected = i
+
+                    break; 
+                } 
+                    
+            }
+
+
+            const newTotal = (state.total -= parseFloat(state.cart[selected].price))
+
+            let newCart = state.cart
+            let updateCart = state.cart[selected]
+            let newQuantity = state.cart[selected].quantity
+            
+            newQuantity--
+            updateCart.quantity = newQuantity
+            newCart[selected] = updateCart
+            
+            
+            return {
+                cart: newCart,
+                total: newTotal
+            };
+        }
+        else return state;  
+              
+    
 }
 
 export default cartReducer;
