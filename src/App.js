@@ -14,6 +14,18 @@ class App extends Component {
     }
   }
 
+  componentDidMount(){
+    document.addEventListener('dragover', (e) => {
+      e.preventDefault()
+      e.stopPropagation()
+      }
+    )
+    document.addEventListener('drop', (e) => {
+      e.preventDefault()
+      e.stopPropagation()
+      }
+    )
+  }
   
 
   render(){
