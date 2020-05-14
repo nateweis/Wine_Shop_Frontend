@@ -34,6 +34,14 @@ class PayForm extends Component{
 
     // }
 
+    getWines = () => {
+        fetch('http://localhost:3001/wine',{method:'GET'})
+        .then((res)=>{res.json()
+        .then((data)=>console.log(data))
+        })
+    }
+    
+
 
     goToPayPal = (obj) => {
         fetch('http://localhost:3001/pay',{
@@ -95,6 +103,7 @@ class PayForm extends Component{
                     <input type="submit" value="Buy"/>
                 </form>
 
+                <button onClick={this.getWines}>Get Wines</button>
             </>
         )
     }

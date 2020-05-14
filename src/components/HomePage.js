@@ -16,7 +16,7 @@ class HomePage extends Component{
         const formData = new FormData()
         formData.append('newImg', file)
         
-        this.savePicInBackend(formData)
+        // this.savePicInBackend(formData)
         const reader = new FileReader()
         const $picBox = document.querySelector('.pic-box')
         reader.readAsDataURL(file)
