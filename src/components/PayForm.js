@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import LocalStorage from '../models/LocalStorage';
-import {addCart, removeFromCart} from '../actions/shoppingCart'
+import {addCart, removeFromCart, fillStore} from '../actions/shoppingCart'
 
 
 
@@ -34,12 +34,14 @@ class PayForm extends Component{
 
     // }
 
-    getWines = () => {
+    getWines = () => { 
         fetch('http://localhost:3001/wine',{method:'GET'})
         .then((res)=>{res.json()
         .then((data)=>console.log(data))
         })
     }
+
+   
     
 
 
@@ -73,12 +75,24 @@ class PayForm extends Component{
             }
             this.props.cart.forEach(item => {
                 if(item.quantity > 0){
-                    obj.cart.push(item)
+                    const wine ={
+                        name: item.name,
+                        sku: item.sku,
+                        price: item.price,
+                        currency: item.currency,
+                        quantity: item.quantity
+                    }
+                    wine.price = (wine.price + "")
+                    if(wine.sku < 10) wine.sku = "00" + wine.sku
+                    else if(wine.sku < 100) wine.sku = "0" + wine.sku
+                    else wine.sku = "" + wine.sku
+
+                    obj.cart.push(wine)
                 }
             });
 
-            this.goToPayPal(obj);
-            // console.log(obj)
+            // this.goToPayPal(obj);
+            console.log(obj)
         }
         
     }
@@ -89,21 +103,21 @@ class PayForm extends Component{
         return(
             <>
                 <div className="cart-option">
-                    Red Wine : $30 <button onClick={()=>this.props.removeFromCart("red")}>-</button> 
+                    {this.props.cart[0].name} : ${this.props.cart[0].price} <button onClick={()=>this.props.removeFromCart(this.props.cart[0].name)}>-</button> 
                     <input type="number" value={this.props.cart[0].quantity} disabled/> 
-                    <button onClick={()=>this.props.addCart("red")}>+</button>
+                    <button onClick={()=>this.props.addCart(this.props.cart[0].name)}>+</button>
                 </div>
                 <div className="cart-option">
-                     White Wine : $22 <button onClick={()=>this.props.removeFromCart("white")}>-</button> 
+                     {this.props.cart[1].name} : ${this.props.cart[1].price} <button onClick={()=>this.props.removeFromCart(this.props.cart[1].name)}>-</button> 
                     <input type="number" value={this.props.cart[1].quantity} disabled/> 
-                    <button onClick={()=>this.props.addCart("white")}>+</button>
+                    <button onClick={()=>this.props.addCart(this.props.cart[1].name)}>+</button>
                 </div>
                 <form onSubmit={this.submitPayment}>
                     Total: {this.props.total} <br/>
                     <input type="submit" value="Buy"/>
                 </form>
 
-                <button onClick={this.getWines}>Get Wines</button>
+                <button onClick={this.props.fillStore}>Get Wines</button>
             </>
         )
     }
@@ -114,7 +128,8 @@ PayForm.protoTypes = {
     total : PropTypes.number,
     cart : PropTypes.array,
     addCart : PropTypes.func,
-    removeFromCart: PropTypes.func
+    removeFromCart: PropTypes.func,
+    fillStore: PropTypes.func
 }
 
 const mapStateToProps = (state) => ({
@@ -126,4 +141,4 @@ const mapStateToProps = (state) => ({
 
 
 
-export default connect(mapStateToProps, {addCart, removeFromCart})(PayForm)
+export default connect(mapStateToProps, {addCart, removeFromCart, fillStore})(PayForm)

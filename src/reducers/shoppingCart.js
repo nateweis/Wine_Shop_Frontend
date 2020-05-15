@@ -1,17 +1,17 @@
-import {ADD_CART, REMOVE_CART} from '../actions/types'
+import {ADD_CART, REMOVE_CART, POPULATE_STORE} from '../actions/types'
 let initState = {
         total: 0,
         cart : [{
             name: "red",
-            sku: "001",
-            price: "30.00",
+            sku: 1,
+            price: 30.00,
             currency: "USD",
             quantity: 0
         },
         {
             name: "white",
-            sku: "002",
-            price: "22.00",
+            sku: 2,
+            price: 22.00,
             currency: "USD",
             quantity: 0
         }
@@ -20,7 +20,13 @@ let initState = {
 
 const cartReducer = (state = initState, action) => {
 
-        if(action.type === ADD_CART) {
+        if(action.type === POPULATE_STORE){
+            return{
+                ...state,
+                cart : action.payload
+            }
+        }
+        else if(action.type === ADD_CART) {
 
             let selected;
             for (let i = 0; i < state.cart.length; i++) {
@@ -34,7 +40,7 @@ const cartReducer = (state = initState, action) => {
             }
 
             
-            const newTotal = (state.total += parseFloat(state.cart[selected].price))
+            const newTotal = (state.total += state.cart[selected].price)
 
             let newCart = state.cart
             let updateCart = state.cart[selected]
@@ -64,7 +70,7 @@ const cartReducer = (state = initState, action) => {
             }
 
 
-            const newTotal = (state.total -= parseFloat(state.cart[selected].price))
+            const newTotal = (state.total -= state.cart[selected].price)
 
             let newCart = state.cart
             let updateCart = state.cart[selected]
