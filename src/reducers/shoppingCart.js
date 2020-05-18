@@ -1,21 +1,7 @@
 import {ADD_CART, REMOVE_CART, POPULATE_STORE} from '../actions/types'
 let initState = {
         total: 0,
-        cart : [{
-            name: "red",
-            sku: 1,
-            price: 30.00,
-            currency: "USD",
-            quantity: 0
-        },
-        {
-            name: "white",
-            sku: 2,
-            price: 22.00,
-            currency: "USD",
-            quantity: 0
-        }
-        ]
+        cart : []
 }
 
 const cartReducer = (state = initState, action) => {

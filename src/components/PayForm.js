@@ -102,16 +102,16 @@ class PayForm extends Component{
         // const counter = useSelector(state => state.counter)
         return(
             <>
-                <div className="cart-option">
-                    {this.props.cart[0].name} : ${this.props.cart[0].price} <button onClick={()=>this.props.removeFromCart(this.props.cart[0].name)}>-</button> 
-                    <input type="number" value={this.props.cart[0].quantity} disabled/> 
-                    <button onClick={()=>this.props.addCart(this.props.cart[0].name)}>+</button>
-                </div>
-                <div className="cart-option">
-                     {this.props.cart[1].name} : ${this.props.cart[1].price} <button onClick={()=>this.props.removeFromCart(this.props.cart[1].name)}>-</button> 
-                    <input type="number" value={this.props.cart[1].quantity} disabled/> 
-                    <button onClick={()=>this.props.addCart(this.props.cart[1].name)}>+</button>
-                </div>
+            {this.props.cart? this.props.cart.map((item, index)=>{
+                return(
+                    <div className="cart-option" key={index}>
+                        {item.name} : ${item.price} <button onClick={()=>this.props.removeFromCart(item.name)}>-</button> 
+                        <input type="number" value={item.quantity} disabled/> 
+                        <button onClick={()=>this.props.addCart(item.name)}>+</button>
+                    </div>
+                )
+            }) : "Loading......" }
+                
                 <form onSubmit={this.submitPayment}>
                     Total: {this.props.total} <br/>
                     <input type="submit" value="Buy"/>
