@@ -105,6 +105,7 @@ class PayForm extends Component{
             {this.props.cart? this.props.cart.map((item, index)=>{
                 return(
                     <div className="cart-option" key={index}>
+                        <img src={`http://localhost:3001/${item.img}`}/>
                         {item.name} : ${item.price} <button onClick={()=>this.props.removeFromCart(item.name)}>-</button> 
                         <input type="number" value={item.quantity} disabled/> 
                         <button onClick={()=>this.props.addCart(item.name)}>+</button>

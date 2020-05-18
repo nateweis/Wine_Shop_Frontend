@@ -51,9 +51,11 @@ const cartReducer = (state = initState, action) => {
                     selected = i
 
                     break; 
-                } 
+                }
+                else selected = -10 
                     
             }
+            if(selected === -10) return state;
 
 
             const newTotal = (state.total -= state.cart[selected].price)
