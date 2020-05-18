@@ -12,16 +12,18 @@ export const fillStore = () => dispatch => {
         })
 }
 
-export const addCart = (item) => dispatch => {
+export const addCart = (item, primary) => dispatch => {
     return dispatch({
        type: ADD_CART,
-       payload : item
+       payload : item,
+       primary
     })
 }
 
-export const removeFromCart = (item) => dispatch => {
+export const removeFromCart = (item, primary) => dispatch => {
     return dispatch({
        type: REMOVE_CART,
-       payload : item
+       payload : item,
+       primary
     })
 }

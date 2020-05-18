@@ -13,7 +13,7 @@ const cartReducer = (state = initState, action) => {
             }
         }
         else if(action.type === ADD_CART) {
-
+            console.log(action.primary)
             let selected;
             for (let i = 0; i < state.cart.length; i++) {
                 if(state.cart[i].name === action.payload){
@@ -26,14 +26,14 @@ const cartReducer = (state = initState, action) => {
             }
 
             
-            const newTotal = (state.total += state.cart[selected].price)
+            const newTotal = (action.primary ? (state.total += state.cart[selected].price) : (state.total += state.cart[selected].price2))
 
             let newCart = state.cart
             let updateCart = state.cart[selected]
-            let newQuantity = state.cart[selected].quantity
+            let newQuantity = (action.primary ? state.cart[selected].quantity : state.cart[selected].quantity2)
             
             newQuantity++
-            updateCart.quantity = newQuantity
+            action.primary ? updateCart.quantity = newQuantity : updateCart.quantity2 = newQuantity
             newCart[selected] = updateCart
             
             
@@ -46,8 +46,13 @@ const cartReducer = (state = initState, action) => {
             
             let selected;
             for (let i = 0; i < state.cart.length; i++) {
-                if(state.cart[i].name === action.payload && state.cart[i].quantity > 0){
+                if(action.primary && state.cart[i].name === action.payload && state.cart[i].quantity > 0){
                 
+                    selected = i
+
+                    break; 
+                }
+                else if(!action.primary && state.cart[i].name === action.payload && state.cart[i].quantity2 > 0){
                     selected = i
 
                     break; 
@@ -55,17 +60,18 @@ const cartReducer = (state = initState, action) => {
                 else selected = -10 
                     
             }
+
             if(selected === -10) return state;
 
 
-            const newTotal = (state.total -= state.cart[selected].price)
+            const newTotal = (action.primary ? (state.total -= state.cart[selected].price) : (state.total -= state.cart[selected].price2))
 
             let newCart = state.cart
             let updateCart = state.cart[selected]
-            let newQuantity = state.cart[selected].quantity
+            let newQuantity = (action.primary ? state.cart[selected].quantity : state.cart[selected].quantity2)
             
             newQuantity--
-            updateCart.quantity = newQuantity
+            action.primary ? updateCart.quantity = newQuantity : updateCart.quantity2 = newQuantity
             newCart[selected] = updateCart
             
             

@@ -106,9 +106,15 @@ class PayForm extends Component{
                 return(
                     <div className="cart-option" key={index}>
                         <img src={`http://localhost:3001/${item.img}`}/>
-                        {item.name} : ${item.price} <button onClick={()=>this.props.removeFromCart(item.name)}>-</button> 
+                        {item.name} : ${item.price} <button onClick={()=>this.props.removeFromCart(item.name, true)}>-</button> 
                         <input type="number" value={item.quantity} disabled/> 
-                        <button onClick={()=>this.props.addCart(item.name)}>+</button>
+                        <button onClick={()=>this.props.addCart(item.name, true)}>+</button>
+
+                        {item.price2? <>
+                            ${item.price2} <button onClick={()=>this.props.removeFromCart(item.name, false)}>-</button> 
+                        <input type="number" value={item.quantity2} disabled/> 
+                        <button onClick={()=>this.props.addCart(item.name, false)}>+</button>
+                        </> : ""}
                     </div>
                 )
             }) : "Loading......" }
