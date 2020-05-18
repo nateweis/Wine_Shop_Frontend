@@ -89,6 +89,21 @@ class PayForm extends Component{
 
                     obj.cart.push(wine)
                 }
+                if(item.quantity2 > 0){
+                    const wine ={
+                        name: item.name,
+                        sku: item.sku,
+                        price: item.price2,
+                        currency: item.currency,
+                        quantity: item.quantity2
+                    }
+                    wine.price = (wine.price + "")
+                    if(wine.sku < 10) wine.sku = "00" + wine.sku
+                    else if(wine.sku < 100) wine.sku = "0" + wine.sku
+                    else wine.sku = "" + wine.sku
+
+                    obj.cart.push(wine)
+                }
             });
 
             // this.goToPayPal(obj);
