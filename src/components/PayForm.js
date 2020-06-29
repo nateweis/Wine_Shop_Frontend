@@ -4,6 +4,9 @@ import {connect} from 'react-redux';
 import LocalStorage from '../models/LocalStorage';
 import {addCart, removeFromCart, fillStore} from '../actions/shoppingCart'
 
+import ItalyWine from './ShopSections/ItalyWine';
+import CaliWine from './ShopSections/CaliWine';
+
 
 
 
@@ -117,29 +120,16 @@ class PayForm extends Component{
         // const counter = useSelector(state => state.counter)
         return(
             <>
-            {this.props.cart? this.props.cart.map((item, index)=>{
-                return(
-                    <div className="cart-option" key={index}>
-                        <img src={`http://localhost:3001/${item.img}`}/>
-                        {item.name} : ${item.price} <button onClick={()=>this.props.removeFromCart(item.name, true)}>-</button> 
-                        <input type="number" value={item.quantity} disabled/> 
-                        <button onClick={()=>this.props.addCart(item.name, true)}>+</button>
-
-                        {item.price2? <>
-                            ${item.price2} <button onClick={()=>this.props.removeFromCart(item.name, false)}>-</button> 
-                        <input type="number" value={item.quantity2} disabled/> 
-                        <button onClick={()=>this.props.addCart(item.name, false)}>+</button>
-                        </> : ""}
-                    </div>
-                )
-            }) : "Loading......" }
-                
+                <ItalyWine /> 
+                <CaliWine />    
                 <form onSubmit={this.submitPayment}>
                     Total: {this.props.total} <br/>
                     <input type="submit" value="Buy"/>
                 </form>
 
                 <button onClick={this.props.fillStore}>Get Wines</button>
+
+                
             </>
         )
     }
@@ -155,7 +145,6 @@ PayForm.protoTypes = {
 }
 
 const mapStateToProps = (state) => ({
-    counter : state.counter,
     total : state.shoppingCart.total,
     cart : state.shoppingCart.cart
 });

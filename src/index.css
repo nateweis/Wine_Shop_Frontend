@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+.cart-option{
+  border: 1px solid black;
+}
+
+
 .cart-option input{
   width: 30px;
   
