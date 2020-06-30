@@ -12,8 +12,22 @@ code {
     monospace;
 }
 
+.shopping-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .cart-option{
   border: 1px solid black;
+  width: 500px;
+}
+
+
+.cart-option .display-image img{
+  height: 300px;
+  display: block;
+  margin: auto;
 }
 
 

@@ -22,7 +22,7 @@ class ApprovePayment extends Component{
         return(
             <>
                 <h3>Hopfully It Went through</h3>
-                <button onClick={()=>this.props.push('/Home')}>Back to Home Page</button>
+                <button onClick={()=>this.props.push('/wine-store/home')}>Back to Home Page</button>
             </>
         )
     }

@@ -4,6 +4,7 @@ import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import PayForm from './components/PayForm';
 import ApprovePayment from './components/ApprovePayment';
 import HomePage from './components/HomePage';
+import Nav from './components/Nav';
 
 
 class App extends Component {
@@ -31,13 +32,14 @@ class App extends Component {
   render(){
     return (
       <BrowserRouter>
+          <Route path="/wine-store" component={Nav} />
         <Switch>
-          <Route path="/" exact render={()=> <Redirect to="/Home" />} />
-          <Route path="/Home" exact render={({history})=><HomePage push={history.push} />} />
+          <Route path="/" exact render={()=> <Redirect to="/wine-store/home" />} />
+          <Route path="/wine-store/home" exact render={({history})=><HomePage push={history.push} />} />
 
-          <Route path="/payform" exact render={({history})=><PayForm history={history.push} />} />
+          <Route path="/wine-store/payform" exact render={({history})=><PayForm history={history.push} />} />
   
-          <Route path="/good" exact render={({history, location})=><ApprovePayment push={history.push} location={location} />} />
+          <Route path="/wine-store/good" exact render={({history, location})=><ApprovePayment push={history.push} location={location} />} />
   
           <Route render={()=>{return (<div>404 page not found</div>)}} />
         </Switch>

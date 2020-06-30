@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {addCart, removeFromCart} from '../../actions/shoppingCart'
 
 
 class CaliWine extends Component{
@@ -60,7 +61,8 @@ class CaliWine extends Component{
 
 const style = {
     h2:{
-        color: 'purple'
+        color: 'purple',
+        backgroundColor: 'rgba(0,0,0,.2)'
     }
 }
 
@@ -70,4 +72,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps)(CaliWine)
+export default connect(mapStateToProps,{addCart, removeFromCart})(CaliWine)

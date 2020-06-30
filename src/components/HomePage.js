@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class HomePage extends Component{
 
     goToPayPage = () => {
-        this.props.push('/payForm')
+        this.props.push('/wine-store/payForm')
     }
 
     handleDrop = (file) => {
