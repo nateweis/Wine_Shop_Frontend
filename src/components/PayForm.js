@@ -6,6 +6,7 @@ import {addCart, removeFromCart, fillStore} from '../actions/shoppingCart'
 
 import ItalyWine from './ShopSections/ItalyWine';
 import CaliWine from './ShopSections/CaliWine';
+import FilterSearchBar from './FilterSearchBar'
 
 
 
@@ -13,24 +14,7 @@ import CaliWine from './ShopSections/CaliWine';
 class PayForm extends Component{
     constructor(props) {
         super(props)
-        this.state = {
-            total: 0,
-            cart : [{
-                name: "spiral",
-                sku: "001",
-                price: "75.00",
-                currency: "USD",
-                quantity: 0
-            },
-            {
-                name: "monograms",
-                sku: "002",
-                price: "200.00",
-                currency: "USD",
-                quantity: 0
-            }
-            ]
-        }
+        this.state = {}
     }
 
     // componentWillReceiveProps(newProps){
@@ -44,82 +28,14 @@ class PayForm extends Component{
         })
     }
 
-   
-    
-
-
-    // goToPayPal = (obj) => {
-    //     fetch('http://localhost:3001/pay',{
-    //         method: 'POST',
-    //         headers:{'Accept': 'application/json', 'Content-Type': 'application/json'},
-    //         body: JSON.stringify(obj)
-    //     })
-    //     .then((res) => {
-    //         res.json()
-    //         .then((data)=>{
-    //             if(data.link){
-    //                 LocalStorage.storeTotal(obj.total)
-    //                 window.location.assign(data.link)
-    //             }
-    //         },(err)=>{console.log(err)})
-    //     })
-    // }
-    
-
-    // submitPayment = (e) => {
-    //     e.preventDefault();
-
-    //     if(this.props.total === 0){
-    //         alert("Shopping Cart is Empty")
-    //     }else{
-    //         const obj = {
-    //             total: this.props.total + "",
-    //             cart: []
-    //         }
-    //         this.props.cart.forEach(item => {
-    //             if(item.quantity > 0){
-    //                 const wine ={
-    //                     name: item.name,
-    //                     sku: item.sku,
-    //                     price: item.price,
-    //                     currency: item.currency,
-    //                     quantity: item.quantity
-    //                 }
-    //                 wine.price = (wine.price + "")
-    //                 if(wine.sku < 10) wine.sku = "00" + wine.sku
-    //                 else if(wine.sku < 100) wine.sku = "0" + wine.sku
-    //                 else wine.sku = "" + wine.sku
-
-    //                 obj.cart.push(wine)
-    //             }
-    //             if(item.quantity2 > 0){
-    //                 const wine ={
-    //                     name: item.name,
-    //                     sku: item.sku,
-    //                     price: item.price2,
-    //                     currency: item.currency,
-    //                     quantity: item.quantity2
-    //                 }
-    //                 wine.price = (wine.price + "")
-    //                 if(wine.sku < 10) wine.sku = "00" + wine.sku
-    //                 else if(wine.sku < 100) wine.sku = "0" + wine.sku
-    //                 else wine.sku = "" + wine.sku
-
-    //                 obj.cart.push(wine)
-    //             }
-    //         });
-
-    //         // this.goToPayPal(obj);
-    //         console.log(obj)
-    //     }
-        
-    // }
 
     
     render(){
         // const counter = useSelector(state => state.counter)
         return(
             <>
+
+                <FilterSearchBar />
                 <ItalyWine /> 
                 <CaliWine />    
                 {/* <form onSubmit={this.submitPayment}>
