@@ -1,9 +1,12 @@
 import {CREATE_FILTER_OBJECT} from '../actions/types'
-let initState = {}
 
-const filterReducer = (state = initState, action) => {
-    if(action.type === CREATE_FILTER_OBJECT) return action.payload
-    else return state 
+const filterReducer = (state = {}, action) => {
+    switch(action.type){
+        case CREATE_FILTER_OBJECT:
+            return action.payload;
+        default:
+            return state;
+    }
 }
 
 export default filterReducer   

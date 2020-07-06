@@ -68,7 +68,7 @@ FilterSearchBar.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-
+   
 });
 
 

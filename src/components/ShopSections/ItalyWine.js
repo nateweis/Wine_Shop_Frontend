@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import {addCart, removeFromCart} from '../../actions/shoppingCart'
 
 
@@ -9,15 +10,18 @@ class ItalyWine extends Component{
         this.state = {}
     }
 
+
     render(){
-        return(
-            <>
-                <h2 style={style.h2}>Italy Wine</h2>
-                <div className="shopping-container">
-                    {this.props.cart? this.props.cart.map((item, index)=>{
-                    if(item.origin === 'italy'){
-                        return(
-                            <div className="cart-option" key={index}>
+        let filteredCart = this.props.cart? this.props.cart.filter((item) => {
+            return item.color.indexOf('white') !== -1
+            }
+        ) : null;
+
+        const storeOptions = filteredCart? filteredCart.map((item, index) => {
+            if(item.origin === 'italy'){
+                return(
+                    <>
+                        <div className="cart-option" key={index}>
                                 <div className="display-image"><img src={`http://localhost:3001/${item.img}`}/></div>
         
                                 <h3 className="display-title">{item.name}</h3>
@@ -52,9 +56,19 @@ class ItalyWine extends Component{
                                     </div> 
                                 </> : ""}
                             </div>
-                        )
-                    }
-                }) : "Loading......" }
+                    </>
+                    )
+                }
+            
+            }
+        ) : "Loading......";
+
+        return(
+            <>
+                <h2 style={style.h2}>Italy Wine</h2>
+                {/* <div>{storeOptions}</div> */}
+                <div className="shopping-container">
+                    {storeOptions}
                 </div>
                 
             </>
@@ -69,9 +83,19 @@ const style = {
     }
 }
 
+ItalyWine.protoTypes = {
+    counter : PropTypes.number,
+    total : PropTypes.number,
+    cart : PropTypes.array,
+    addCart : PropTypes.func,
+    removeFromCart: PropTypes.func,
+    filter: PropTypes.object
+}
+
 const mapStateToProps = (state) => ({
     total : state.shoppingCart.total,
-    cart : state.shoppingCart.cart
+    cart : state.shoppingCart.cart,
+    filter : state.filter
 });
 
 
