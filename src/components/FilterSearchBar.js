@@ -20,6 +20,7 @@ class FilterSearchBar extends Component{
                 if(checked) pre.filter[catigory] = [value, ...pre.filter[catigory]]
                 else {
                     pre.filter[catigory].splice(pre.filter[catigory].indexOf(value),1)
+                    if(pre.filter[catigory].length === 0) delete pre.filter[catigory]
                 }
             }
             else pre.filter[catigory] = [value]

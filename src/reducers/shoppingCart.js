@@ -13,7 +13,7 @@ const cartReducer = (state = initState, action) => {
             }
         }
         else if(action.type === ADD_CART) {
-            console.log(action.primary)
+
             let selected;
             for (let i = 0; i < state.cart.length; i++) {
                 if(state.cart[i].name === action.payload){

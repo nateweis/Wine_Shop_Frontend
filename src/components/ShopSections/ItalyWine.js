@@ -10,17 +10,14 @@ class ItalyWine extends Component{
         this.state = {}
     }
 
-    populateFilterCart = () => {
-        
-    }
     
 
     render(){
-        let filteredCart = []
+        let filteredCart = this.props.cart
         const filterKeys = Object.keys(this.props.filter);
         
         filterKeys.forEach((key) => {
-
+            filteredCart = []
                     if(this.props.filter[key].length > 0){
                         this.props.filter[key].forEach((f) => {
                                 let arr = this.props.cart? this.props.cart.filter((item) => {
