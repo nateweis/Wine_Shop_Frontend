@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {addCart, removeFromCart} from '../actions/shoppingCart'
+import PropTypes from 'prop-types';
+import {addToFilter} from '../actions/filter'
 
 
 class FilterSearchBar extends Component{
@@ -28,21 +29,31 @@ class FilterSearchBar extends Component{
         )
     }
 
+    submitFilter = (e) => {
+        e.preventDefault();
+        this.props.addToFilter(this.state.filter)
+    }
+    
+
     render(){
         return(
             <>
                 <h4>Filter Options</h4>
-                    <label htmlFor="checkbox-red">Red</label>
-                    <input type="checkbox" name="color" id="checkbox-red" value="red" onChange={this.filterSearch}/>
-                    <label htmlFor="checkbox-white">White</label>
-                    <input type="checkbox" name="color" id="checkbox-white" value="white" onChange={this.filterSearch}/>
-                    <label htmlFor="checkbox-rose">Rose</label>
-                    <input type="checkbox" name="color" id="checkbox-rose" value="rose" onChange={this.filterSearch}/>
+                    <form onSubmit={this.submitFilter}>
+                        <label htmlFor="checkbox-red">Red</label>
+                        <input type="checkbox" name="color" id="checkbox-red" value="red" onChange={this.filterSearch}/>
+                        <label htmlFor="checkbox-white">White</label>
+                        <input type="checkbox" name="color" id="checkbox-white" value="white" onChange={this.filterSearch}/>
+                        <label htmlFor="checkbox-rose">Rose</label>
+                        <input type="checkbox" name="color" id="checkbox-rose" value="rose" onChange={this.filterSearch}/>
 
-                    <label htmlFor="checkbox-italy">Italy</label>
-                    <input type="checkbox" name="origin" id="checkbox-italy" value="italy" onChange={this.filterSearch}/>
-                    <label htmlFor="checkbox-california">California</label>
-                    <input type="checkbox" name="origin" id="checkbox-california" value="california" onChange={this.filterSearch}/>
+                        <label htmlFor="checkbox-italy">Italy</label>
+                        <input type="checkbox" name="origin" id="checkbox-italy" value="italy" onChange={this.filterSearch}/>
+                        <label htmlFor="checkbox-california">California</label>
+                        <input type="checkbox" name="origin" id="checkbox-california" value="california" onChange={this.filterSearch}/>
+
+                        <input type="submit"/>
+                    </form>
             </>
         )
     }
@@ -52,9 +63,13 @@ const style = {
 
 }
 
+FilterSearchBar.propTypes = {
+    addToFilter : PropTypes.func
+}
+
 const mapStateToProps = (state) => ({
 
 });
 
 
-export default connect(null, {})(FilterSearchBar)
+export default connect(null, {addToFilter})(FilterSearchBar)
