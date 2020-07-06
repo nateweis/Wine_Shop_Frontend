@@ -10,17 +10,38 @@ class ItalyWine extends Component{
         this.state = {}
     }
 
+    populateFilterCart = () => {
+        
+    }
+    
 
     render(){
-        let filteredCart = this.props.cart? this.props.cart.filter((item) => {
-            return item.color.indexOf('white') !== -1
+        let filteredCart = []
+        const filterKeys = Object.keys(this.props.filter);
+        
+        filterKeys.forEach((key) => {
+
+                    if(this.props.filter[key].length > 0){
+                        this.props.filter[key].forEach((f) => {
+                                let arr = this.props.cart? this.props.cart.filter((item) => {
+                                    return  item[key].indexOf(f) !== -1
+                                    }
+                                ) : null; 
+                                filteredCart = filteredCart.concat(arr)   
+                            }
+                        )
+                    }
+
             }
-        ) : null;
+        )
+        
+        
+        
 
         const storeOptions = filteredCart? filteredCart.map((item, index) => {
             if(item.origin === 'italy'){
                 return(
-                    <>
+                    
                         <div className="cart-option" key={index}>
                                 <div className="display-image"><img src={`http://localhost:3001/${item.img}`}/></div>
         
@@ -56,7 +77,7 @@ class ItalyWine extends Component{
                                     </div> 
                                 </> : ""}
                             </div>
-                    </>
+                    
                     )
                 }
             
