@@ -11,10 +11,15 @@ import FilterSearchBar from './FilterSearchBar'
 
 
 
+
 class PayForm extends Component{
     constructor(props) {
         super(props)
         this.state = {}
+    }
+
+    componentDidMount(){
+        this.props.fillStore()
     }
 
     // componentWillReceiveProps(newProps){

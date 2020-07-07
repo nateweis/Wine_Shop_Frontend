@@ -36,9 +36,9 @@ class CaliWine extends Component{
         
                                 <div className="display-price">
                                     <strong>${item.price}</strong> 
-                                    <button onClick={()=>this.props.removeFromCart(item.name, true)}>-</button> 
+                                    <button onClick={()=>this.props.removeFromCart(item.id, true)}>-</button> 
                                     <input type="number" value={item.quantity} disabled/> 
-                                    <button onClick={()=>this.props.addCart(item.name, true)}>+</button>
+                                    <button onClick={()=>this.props.addCart(item.id, true)}>+</button>
                                 </div>
                                 
         
@@ -46,9 +46,9 @@ class CaliWine extends Component{
                                     {item.name2?<h3 className="display-second-title"> {item.name2} </h3>: ""}
                                     <div className="display-second-price">
                                         <strong>${item.price2}</strong>
-                                        <button onClick={()=>this.props.removeFromCart(item.name, false)}>-</button> 
+                                        <button onClick={()=>this.props.removeFromCart(item.id, false)}>-</button> 
                                         <input type="number" value={item.quantity2} disabled/> 
-                                        <button onClick={()=>this.props.addCart(item.name, false)}>+</button>
+                                        <button onClick={()=>this.props.addCart(item.id, false)}>+</button>
                                     </div> 
                                 </> : ""}
                             </div>

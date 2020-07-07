@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {addToFilter} from '../actions/filter'
+import {addToFilter} from '../actions/filter';
+import {addCart, removeFromCart} from '../actions/shoppingCart'
 
 
 class FilterSearchBar extends Component{
@@ -32,8 +33,12 @@ class FilterSearchBar extends Component{
 
     submitFilter = (e) => {
         e.preventDefault();
-        this.props.addToFilter(this.state.filter)
+        this.props.addToFilter(this.state.filter);
+        this.props.addCart(1, true)
+        setTimeout(()=>this.props.removeFromCart(1, true), 1)
     }
+
+    
     
 
     render(){
@@ -55,6 +60,7 @@ class FilterSearchBar extends Component{
 
                         <input type="submit"/>
                     </form>
+                
             </>
         )
     }
@@ -66,6 +72,7 @@ const style = {
 
 FilterSearchBar.propTypes = {
     addToFilter : PropTypes.func
+    
 }
 
 const mapStateToProps = (state) => ({
@@ -73,4 +80,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(null, {addToFilter})(FilterSearchBar)
+export default connect(null, {addToFilter, addCart, removeFromCart})(FilterSearchBar)

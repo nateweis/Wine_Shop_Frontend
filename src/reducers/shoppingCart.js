@@ -1,7 +1,7 @@
 import {ADD_CART, REMOVE_CART, POPULATE_STORE} from '../actions/types'
 let initState = {
         total: 0,
-        cart : []
+        cart : [{id: 1, price: 1, quantity: 0}]
 }
 
 const cartReducer = (state = initState, action) => {
@@ -16,7 +16,7 @@ const cartReducer = (state = initState, action) => {
 
             let selected;
             for (let i = 0; i < state.cart.length; i++) {
-                if(state.cart[i].name === action.payload){
+                if(state.cart[i].id === action.payload){
                   
                     selected = i
 
@@ -25,7 +25,6 @@ const cartReducer = (state = initState, action) => {
                        
             }
 
-            
             const newTotal = (action.primary ? (state.total += state.cart[selected].price) : (state.total += state.cart[selected].price2))
 
             let newCart = state.cart
@@ -46,13 +45,13 @@ const cartReducer = (state = initState, action) => {
             
             let selected;
             for (let i = 0; i < state.cart.length; i++) {
-                if(action.primary && state.cart[i].name === action.payload && state.cart[i].quantity > 0){
+                if(action.primary && state.cart[i].id === action.payload && state.cart[i].quantity > 0){
                 
                     selected = i
 
                     break; 
                 }
-                else if(!action.primary && state.cart[i].name === action.payload && state.cart[i].quantity2 > 0){
+                else if(!action.primary && state.cart[i].id === action.payload && state.cart[i].quantity2 > 0){
                     selected = i
 
                     break; 
