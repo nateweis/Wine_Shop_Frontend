@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import {addCart, removeFromCart} from '../../actions/shoppingCart'
 
 
@@ -10,14 +11,42 @@ class CaliWine extends Component{
     }
 
     render(){
-        return(
-            <>
-                <h2 style={style.h2}>California Wine</h2>
-                <div className="shopping-container">
-                    {this.props.cart? this.props.cart.map((item, index)=>{
-                    if(item.origin === 'california'){
-                        return(
-                            <div className="cart-option" key={index}>
+        let filteredCart = this.props.cart
+        if(Object.keys(this.props.filter).length){
+            
+            const filterKeys = Object.keys(this.props.filter);
+            let tempFilterArr = this.props.cart
+        
+            filterKeys.forEach((key) => {
+                
+                        if(this.props.filter[key].length > 0){
+                            let holder = []
+                            this.props.filter[key].forEach((f) => {
+                                    let arr = tempFilterArr? tempFilterArr.filter((item) => {
+                                        return  item[key].indexOf(f) !== -1
+                                        }
+                                    ) : null; 
+                                    holder = holder.concat(arr) 
+                                    
+                                }
+                            )
+                            tempFilterArr = holder
+                        }
+
+                }
+            )
+
+            filteredCart = tempFilterArr
+        }
+        
+        
+        
+
+        const storeOptions = filteredCart? filteredCart.map((item, index) => {
+            if(item.origin === 'california'){
+                return(
+                    
+                        <div className="cart-option" key={index}>
                                 <div className="display-image"><img src={`http://localhost:3001/${item.img}`}/></div>
         
                                 <h3 className="display-title">{item.name}</h3>
@@ -52,10 +81,19 @@ class CaliWine extends Component{
                                     </div> 
                                 </> : ""}
                             </div>
-                        )
-                    }
-                }) : "Loading......" }
-            </div>
+                    
+                    )
+                }
+            
+            }
+        ) : "Loading......";
+        return(
+            <>
+                <h2 style={style.h2}>California Wine</h2>
+                <div className="shopping-container">
+                    {storeOptions}
+                </div>    
+                        
             </>
         )
     }
@@ -68,9 +106,19 @@ const style = {
     }
 }
 
+CaliWine.protoTypes = {
+    counter : PropTypes.number,
+    total : PropTypes.number,
+    cart : PropTypes.array,
+    addCart : PropTypes.func,
+    removeFromCart: PropTypes.func,
+    filter: PropTypes.object
+}
+
 const mapStateToProps = (state) => ({
     total : state.shoppingCart.total,
-    cart : state.shoppingCart.cart
+    cart : state.shoppingCart.cart,
+    filter : state.filter
 });
 
 

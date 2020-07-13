@@ -34,8 +34,14 @@ class FilterSearchBar extends Component{
     submitFilter = (e) => {
         e.preventDefault();
         this.props.addToFilter(this.state.filter);
-        this.props.addCart(1, true)
-        setTimeout(()=>this.props.removeFromCart(1, true), 1)
+        this.props.addCart(this.props.id, true)
+        setTimeout(()=>this.props.removeFromCart(this.props.id, true), 1)
+
+        const checkboxes = e.target.children
+        for(let i = 0; i < checkboxes.length; i++){
+            if(checkboxes[i].type === 'checkbox') checkboxes[i].checked = false
+        }
+        this.setState({filter:{}})
     }
 
     
@@ -76,8 +82,8 @@ FilterSearchBar.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-   
+   id : state.shoppingCart.cart[0].id
 });
 
 
-export default connect(null, {addToFilter, addCart, removeFromCart})(FilterSearchBar)
+export default connect(mapStateToProps, {addToFilter, addCart, removeFromCart})(FilterSearchBar)

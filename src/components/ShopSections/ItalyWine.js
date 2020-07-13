@@ -16,23 +16,32 @@ class ItalyWine extends Component{
 
     render(){
         let filteredCart = this.props.cart
-        const filterKeys = Object.keys(this.props.filter);
+        if(Object.keys(this.props.filter).length){
+            
+            const filterKeys = Object.keys(this.props.filter);
+            let tempFilterArr = this.props.cart
         
-        filterKeys.forEach((key) => {
-            filteredCart = []
-                    if(this.props.filter[key].length > 0){
-                        this.props.filter[key].forEach((f) => {
-                                let arr = this.props.cart? this.props.cart.filter((item) => {
-                                    return  item[key].indexOf(f) !== -1
-                                    }
-                                ) : null; 
-                                filteredCart = filteredCart.concat(arr)   
-                            }
-                        )
-                    }
+            filterKeys.forEach((key) => {
+                
+                if(this.props.filter[key].length > 0){
+                    let holder = []
+                    this.props.filter[key].forEach((f) => {
+                            let arr = tempFilterArr? tempFilterArr.filter((item) => {
+                                return  item[key].indexOf(f) !== -1
+                                }
+                            ) : null; 
+                            holder = holder.concat(arr) 
+                            
+                        }
+                    )
+                    tempFilterArr = holder
+                }
 
-            }
-        )
+                }
+            )
+
+            filteredCart = tempFilterArr
+        }
         
         
         
