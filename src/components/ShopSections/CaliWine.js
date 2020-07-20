@@ -118,7 +118,7 @@ CaliWine.protoTypes = {
 const mapStateToProps = (state) => ({
     total : state.shoppingCart.total,
     cart : state.shoppingCart.cart,
-    filter : state.filter
+    filter : state.filter.options
 });
 
 

@@ -1,9 +1,13 @@
-import {CREATE_FILTER_OBJECT} from '../actions/types'
+import {CREATE_FILTER_OBJECT, CREATE_FILTER_CART} from '../actions/types'
 
-const filterReducer = (state = {}, action) => {
+const initState = {options: {}, filteredCart: []}
+const filterReducer = (state = initState, action) => {
     switch(action.type){
         case CREATE_FILTER_OBJECT:
-            return action.payload;
+            return {...state, options : action.payload};
+        case CREATE_FILTER_CART:
+            console.log(state)
+            return state;    
         default:
             return state;
     }
