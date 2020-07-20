@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {addToFilter, makeFilterCart} from '../actions/filter';
-import {addCart, removeFromCart} from '../actions/shoppingCart'
+
 
 
 class FilterSearchBar extends Component{
@@ -34,9 +34,7 @@ class FilterSearchBar extends Component{
     submitFilter = (e) => {
         e.preventDefault();
         this.props.addToFilter(this.state.filter);
-        this.props.addCart(this.props.id, true)
         this.props.makeFilterCart(this.props.cart)
-        setTimeout(()=>this.props.removeFromCart(this.props.id, true), 1)
 
         const checkboxes = e.target.children
         for(let i = 0; i < checkboxes.length; i++){
@@ -91,4 +89,4 @@ const mapStateToProps = (state) => ({
 });
 
 
-export default connect(mapStateToProps, {addToFilter, addCart, removeFromCart, makeFilterCart})(FilterSearchBar)
+export default connect(mapStateToProps, {addToFilter, makeFilterCart})(FilterSearchBar)

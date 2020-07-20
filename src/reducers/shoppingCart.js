@@ -1,7 +1,8 @@
 import {ADD_CART, REMOVE_CART, POPULATE_STORE} from '../actions/types'
 let initState = {
         total: 0,
-        cart : [{id: 1, price: 1, quantity: 0}]
+        cart : [{id: 1, price: 1, quantity: 0}],
+        cartCount: 0
 }
 
 const cartReducer = (state = initState, action) => {
@@ -27,10 +28,12 @@ const cartReducer = (state = initState, action) => {
 
             const newTotal = (action.primary ? (state.total += state.cart[selected].price) : (state.total += state.cart[selected].price2))
 
+            let newCount = state.cartCount
             let newCart = state.cart
             let updateCart = state.cart[selected]
             let newQuantity = (action.primary ? state.cart[selected].quantity : state.cart[selected].quantity2)
             
+            newCount++
             newQuantity++
             action.primary ? updateCart.quantity = newQuantity : updateCart.quantity2 = newQuantity
             newCart[selected] = updateCart
@@ -38,7 +41,8 @@ const cartReducer = (state = initState, action) => {
             
             return {
                 cart: newCart,
-                total: newTotal
+                total: newTotal,
+                cartCount: newCount
             };
         }
         else if ( action.type === REMOVE_CART){
@@ -65,10 +69,12 @@ const cartReducer = (state = initState, action) => {
 
             const newTotal = (action.primary ? (state.total -= state.cart[selected].price) : (state.total -= state.cart[selected].price2))
 
+            let newCount = state.cartCount
             let newCart = state.cart
             let updateCart = state.cart[selected]
             let newQuantity = (action.primary ? state.cart[selected].quantity : state.cart[selected].quantity2)
             
+            newCount--
             newQuantity--
             action.primary ? updateCart.quantity = newQuantity : updateCart.quantity2 = newQuantity
             newCart[selected] = updateCart
@@ -76,7 +82,8 @@ const cartReducer = (state = initState, action) => {
             
             return {
                 cart: newCart,
-                total: newTotal
+                total: newTotal,
+                cartCount: newCount
             };
         }
         else return state;  

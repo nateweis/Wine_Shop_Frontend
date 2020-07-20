@@ -81,6 +81,7 @@ class Nav extends Component{
                     <div style={style.navContainer}>
                         <h2>Nav Bar</h2>
                         <form onSubmit={this.submitPayment}>
+                            Cart: {this.props.cartCount} <br/>
                             Total: {this.props.total} <br/>
                             <input type="submit" value="Buy"/>
                         </form>
@@ -105,7 +106,8 @@ const style = {
 
 const mapStateToProps = (state) => ({
     total : state.shoppingCart.total,
-    cart : state.shoppingCart.cart
+    cart : state.shoppingCart.cart,
+    cartCount : state.shoppingCart.cartCount
 });
 
 export default connect(mapStateToProps, {})(Nav)

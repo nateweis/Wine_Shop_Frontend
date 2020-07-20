@@ -16,10 +16,10 @@ class ItalyWine extends Component{
 
     render(){
         let filteredCart = this.props.cart
-        if(Object.keys(this.props.filter).length){
+        if(Object.keys(this.props.options).length){
 
             filteredCart = this.props.filter
-            
+
         }
         
         
@@ -97,13 +97,14 @@ ItalyWine.protoTypes = {
     cart : PropTypes.array,
     addCart : PropTypes.func,
     removeFromCart: PropTypes.func,
-    filter: PropTypes.object
+    filter: PropTypes.array
 }
 
 const mapStateToProps = (state) => ({
     total : state.shoppingCart.total,
     cart : state.shoppingCart.cart,
-    filter : state.filter.filteredCart
+    filter : state.filter.filteredCart,
+    options : state.filter.options
 });
 
 
