@@ -68,8 +68,8 @@ class Nav extends Component{
                 }
             });
 
-            // this.goToPayPal(obj);
-            console.log(obj)
+            this.goToPayPal(obj);
+            // console.log(obj)
         }
         
     }
@@ -81,10 +81,10 @@ class Nav extends Component{
                     <div style={style.navContainer}>
                         <h2>Nav Bar</h2>
                         <form onSubmit={this.submitPayment}>
-                            Cart: {this.props.cartCount} <br/>
                             Total: {this.props.total} <br/>
                             <input type="submit" value="Buy"/>
                         </form>
+                        <button>Cart: {this.props.cartCount}</button>
                     </div> 
                 </div>             
             </>
