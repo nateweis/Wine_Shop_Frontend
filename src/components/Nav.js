@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import LocalStorage from '../models/LocalStorage';
 
@@ -84,7 +85,7 @@ class Nav extends Component{
                             Total: {this.props.total} <br/>
                             <input type="submit" value="Buy"/>
                         </form>
-                        <button>Cart: {this.props.cartCount}</button>
+                        <button onClick={()=>this.props.history.push("/wine-store/checkout")}>Cart: {this.props.cartCount}</button>
                     </div> 
                 </div>             
             </>
@@ -99,7 +100,7 @@ const style = {
         backgroundColor: 'pink'
     },
     spacer:{
-        height: '100px',
+        height: '150px',
         position: 'relative'
     }
 }
@@ -110,4 +111,4 @@ const mapStateToProps = (state) => ({
     cartCount : state.shoppingCart.cartCount
 });
 
-export default connect(mapStateToProps, {})(Nav)
+export default withRouter(connect(mapStateToProps, {})(Nav))

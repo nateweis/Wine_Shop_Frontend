@@ -4,6 +4,7 @@ import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import PayForm from './components/PayForm';
 import ApprovePayment from './components/ApprovePayment';
 import HomePage from './components/HomePage';
+import CheckoutPage from './components/CheckoutPage';
 import Nav from './components/Nav';
 
 
@@ -38,6 +39,7 @@ class App extends Component {
           <Route path="/wine-store/home" exact render={({history})=><HomePage push={history.push} />} />
 
           <Route path="/wine-store/payform" exact render={({history})=><PayForm history={history.push} />} />
+          <Route path="/wine-store/checkout" exact render={({history})=><CheckoutPage history={history.push} />} />
   
           <Route path="/wine-store/good" exact render={({history, location})=><ApprovePayment push={history.push} location={location} />} />
   

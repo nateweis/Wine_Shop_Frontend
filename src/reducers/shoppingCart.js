@@ -1,13 +1,13 @@
 import {ADD_CART, REMOVE_CART, POPULATE_STORE} from '../actions/types'
 let initState = {
         total: 0,
-        cart : [{id: 1, price: 1, quantity: 0}],
+        cart : [{id: 1, price: 1, quantity: 0, name: 'reset'}],
         cartCount: 0
 }
 
 const cartReducer = (state = initState, action) => {
 
-        if(action.type === POPULATE_STORE){
+        if(action.type === POPULATE_STORE && state.cart[0].name === 'reset'){
             return{
                 ...state,
                 cart : action.payload
