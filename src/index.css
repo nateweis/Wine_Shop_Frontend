@@ -36,3 +36,18 @@ code {
   width: 30px;
   
 }
+
+/* /////////////// Drop Down Btns for Adding to the Cart ////////////////// */
+.drop-down-btn-container{
+  position: relative;
+}
+.drop-down-btn-options{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  opacity: .01;
+}
+.hidden{
+  display: none;
+}

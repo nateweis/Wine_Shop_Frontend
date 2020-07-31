@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {removeFromCart} from '../actions/shoppingCart'
+import {removeFromCart, addCart} from '../actions/shoppingCart'
 
 
 class CheckoutPage extends Component{
@@ -18,6 +18,9 @@ class CheckoutPage extends Component{
                     <div key={index}>
                         <div style={style.imgContainer}>
                             <img style={style.imgStyle} src={`http://localhost:3001/${item.img}`}/>
+                                <button onClick={()=>this.props.removeFromCart(item.id, true)} disabled={item.quantity <2? true : false}>-</button> 
+                                    <input type="number" value={item.quantity} disabled/> 
+                                <button onClick={()=>this.props.addCart(item.id, true)}>+</button>
                             <button style={style.removeBtn} onClick={()=>this.fullItemRemoval(item.id, item.quantity)}>Remove</button>
                         </div>
                     </div>
@@ -45,7 +48,7 @@ const style = {
         margin: 'auto'
     },
     removeBtn:{
-        display:'block'
+        display:'inline-block'
     }
 }
 
@@ -55,4 +58,4 @@ const mapStateToProps = (state) => ({
     cartCount : state.shoppingCart.cartCount
 });
 
-export default connect(mapStateToProps, {removeFromCart})(CheckoutPage)
+export default connect(mapStateToProps, {removeFromCart, addCart})(CheckoutPage)

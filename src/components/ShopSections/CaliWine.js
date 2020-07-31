@@ -7,7 +7,22 @@ import {addCart, removeFromCart} from '../../actions/shoppingCart'
 class CaliWine extends Component{
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {val:1}
+    }
+
+    changeBtnVal = (e) => {
+        console.log(e.target.value)
+        // console.log(e.target.type)
+        // console.log(e.currentTarget.children[1].style.opacity)
+        // e.target.innerHTML = "New text!"
+        // e.target.value = 3
+
+        if(e.target.type === 'submit'){e.currentTarget.children[1].style.opacity = '100'}
+        else{
+            e.currentTarget.children[0].innerHTML = `Qty: ${e.target.value} +`
+            e.currentTarget.children[1].style.opacity = '.01'
+        }
+        
     }
 
     render(){
@@ -47,6 +62,22 @@ class CaliWine extends Component{
                                     <button onClick={()=>this.props.removeFromCart(item.id, true)}>-</button> 
                                     <input type="number" value={item.quantity} disabled/> 
                                     <button onClick={()=>this.props.addCart(item.id, true)}>+</button>
+                                </div>
+
+                                    {/* ************ attempting the amazon style dropdown *************** */}
+                                <div>
+                                    <strong>${item.price}</strong>
+
+                                    <span className="drop-down-btn-container" onClick={this.changeBtnVal}>
+                                        <button >Qty: {this.state.val} +</button>
+                                        <select name="" id="" className="drop-down-btn-options ">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </span>
+                                    
+                                    <button>Add to Cart</button>
                                 </div>
                                 
         
